@@ -6,6 +6,7 @@
     android:padding="15dp">
 
     <ImageView
+        android:id="@+id/iv_red_packet_item_img"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="10dp"/>
@@ -15,11 +16,13 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_red_packet_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="simon"
             android:textColor="@color/uikit_black" />
         <TextView
+            android:id="@+id/tv_red_packet_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="留言"
@@ -27,6 +30,7 @@
             android:layout_alignParentBottom="true"/>
 
         <TextView
+            android:id="@+id/tv_red_packet_item_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -25,15 +25,12 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET,value ="/addUser")
     public void addUser(@RequestParam String name,@RequestParam int age){
         User user = new User();
-        user.setAge(age);
-        user.setName(name);
+
         userRepository.save(user);
     }
     @RequestMapping(method = RequestMethod.POST,value = "/addUser")
     public void addUser(@RequestBody AddUserRequest addUserRequest){
         User user = new User();
-        user.setName(addUserRequest.getName());
-        user.setAge(addUserRequest.getAge());
         userRepository.save(user);
     }
 

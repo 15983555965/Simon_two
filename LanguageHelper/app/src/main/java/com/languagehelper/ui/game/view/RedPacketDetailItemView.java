@@ -14,6 +14,7 @@ import com.languagehelper.http.module.RedPacketDetailItem;
 
 public class RedPacketDetailItemView extends RelativeLayout {
     private final Context mContext;
+    private RedPacketDetailItem data;
 
     public RedPacketDetailItemView(Context context) {
         this(context, null);
@@ -36,9 +37,15 @@ public class RedPacketDetailItemView extends RelativeLayout {
 
     private void initView() {
         LayoutInflater.from(mContext).inflate(R.layout.view_red_packet_detail_item, this);
+
     }
 
-    public void setData(RedPacketDetailItem redPacketDetailItem) {
+    public void setData(RedPacketDetailItem data) {
+        this.data=data;
+        update();
+    }
+
+    private void update() {
 
     }
 }

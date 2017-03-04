@@ -1,10 +1,9 @@
 package com.languagehelper.ui.home.adapter.home;
 
 import com.languagehelper.base.MFragment;
-import com.languagehelper.ui.home.fragment.CreateFragment;
-import com.languagehelper.ui.home.fragment.LobbyFragment;
-import com.languagehelper.ui.home.fragment.UserFragment;
-import com.uikit.fragment.BaseFragment;
+import com.languagehelper.ui.home.create.fragment.CreateFragment;
+import com.languagehelper.ui.home.lobby.fragment.LobbyFragment;
+import com.languagehelper.ui.home.user.fragment.UserFragment;
 
 import java.util.HashMap;
 import java.util.Map;

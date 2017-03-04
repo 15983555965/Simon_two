@@ -1,4 +1,4 @@
-package com.languagehelper.ui.home.fragment;
+package com.languagehelper.ui.home.lobby.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 

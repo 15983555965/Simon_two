@@ -1,10 +1,4 @@
-package com.languagehelper.ui.home.fragment;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+package com.languagehelper.ui.home.user.fragment;
 
 import com.languagehelper.R;
 import com.languagehelper.base.MFragment;

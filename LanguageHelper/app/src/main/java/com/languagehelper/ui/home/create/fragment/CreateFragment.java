@@ -1,4 +1,4 @@
-package com.languagehelper.ui.home.fragment;
+package com.languagehelper.ui.home.create.fragment;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,8 +6,6 @@ import android.widget.TextView;
 import com.languagehelper.R;
 import com.languagehelper.base.MFragment;
 import com.languagehelper.web_code.RedPacketHelp;
-
-import java.util.Random;
 
 /**创建房间
  * Created by Administrator on 2017/3/1.

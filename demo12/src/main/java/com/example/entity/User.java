@@ -1,9 +1,7 @@
 package com.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**用户信息表
  * Created by Administrator on 2017/2/17.
@@ -11,34 +9,47 @@ import javax.persistence.Table;
 @Table(name = "user")
 @Entity
 public class User {
-    @Id
-    @GeneratedValue
+
     private long id;
     /**
      * 用户昵称
      */
+
     private String nickname;
     /**
      * 头像
      */
+
     private String portrait;
     /**
      * 注册时间
      */
+
     private long register_time;
     /**
      * 金币
      */
+
     private double gold;
     /**
      * 绑定金币
      */
+
     private double binding_gold;
     /**
      * 用户类型
      */
-    private int user_type;
 
+    private int user_type;
+    /**
+     * 进入得房间
+     */
+
+    private Room room;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "USER_ID")
     public long getId() {
         return id;
     }
@@ -47,6 +58,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name = "NICK_NAME")
     public String getNickname() {
         return nickname;
     }
@@ -55,6 +67,7 @@ public class User {
         this.nickname = nickname;
     }
 
+    @Column(name = "PORTRAIT")
     public String getPortrait() {
         return portrait;
     }
@@ -63,6 +76,7 @@ public class User {
         this.portrait = portrait;
     }
 
+    @Column(name = "REGISTER_TIME")
     public long getRegister_time() {
         return register_time;
     }
@@ -71,6 +85,7 @@ public class User {
         this.register_time = register_time;
     }
 
+    @Column(name = "GOLD")
     public double getGold() {
         return gold;
     }
@@ -79,6 +94,7 @@ public class User {
         this.gold = gold;
     }
 
+    @Column(name = "BINDING_GOLD")
     public double getBinding_gold() {
         return binding_gold;
     }
@@ -87,6 +103,7 @@ public class User {
         this.binding_gold = binding_gold;
     }
 
+    @Column(name = "USER_TYPE")
     public int getUser_type() {
         return user_type;
     }
@@ -94,4 +111,15 @@ public class User {
     public void setUser_type(int user_type) {
         this.user_type = user_type;
     }
+
+    @JoinColumn(name = "ROOM_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
 }

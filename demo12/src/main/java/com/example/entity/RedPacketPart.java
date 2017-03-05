@@ -1,9 +1,6 @@
 package com.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 红包的份额的表
@@ -12,23 +9,23 @@ import javax.persistence.Table;
 @Table(name = "red_packet_part")
 @Entity
 public class RedPacketPart {
-    @Id
-    @GeneratedValue
+
     private long id;
-    /**
-     * 所属红包的Id
-     */
-    private long red_packet_id;
     /**
      * 红包一份的金额
      */
+
     private double red_packet_part_amount;
     /**
      * 所属用户的id
      */
-    private String user_id;
 
+    private User user;
 
+    private RedPacket redPacket;
+
+    @Id
+    @GeneratedValue
     public long getId() {
         return id;
     }
@@ -37,14 +34,7 @@ public class RedPacketPart {
         this.id = id;
     }
 
-    public long getRed_packet_id() {
-        return red_packet_id;
-    }
-
-    public void setRed_packet_id(long red_packet_id) {
-        this.red_packet_id = red_packet_id;
-    }
-
+    @Column(name = "RED_PACKET_PART_AMOUNT")
     public double getRed_packet_part_amount() {
         return red_packet_part_amount;
     }
@@ -53,11 +43,24 @@ public class RedPacketPart {
         this.red_packet_part_amount = red_packet_part_amount;
     }
 
-    public String getUser_id() {
-        return user_id;
+    @JoinColumn(name = "RED_PACKET_ID")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    public RedPacket getRedPacket() {
+        return redPacket;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setRedPacket(RedPacket redPacket) {
+        this.redPacket = redPacket;
     }
+
+    @JoinColumn(name = "USER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

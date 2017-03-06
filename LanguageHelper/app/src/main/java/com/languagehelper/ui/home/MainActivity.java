@@ -3,8 +3,12 @@ package com.languagehelper.ui.home;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.common.core.internet.ApiCallback;
+import com.common.core.internet.ApiModelList;
 import com.languagehelper.R;
 import com.languagehelper.base.MActivity;
+import com.languagehelper.http.module.User;
+import com.languagehelper.http.task.UserApi;
 import com.languagehelper.ui.home.adapter.home.HomeViewPagerAdapter;
 import com.languagehelper.ui.home.view.HomeBottomMenuView;
 import com.uikit.widget.TitleBar;
@@ -48,5 +52,14 @@ public class MainActivity extends MActivity {
         return mTitleBar;
     }
 
+    @Override
+    protected void load() {
+        super.load();
+        UserApi.favoriteList(new ApiCallback<ApiModelList<User>>() {
+            @Override
+            public void onResult(ApiModelList<User> result) {
 
+            }
+        });
+    }
 }

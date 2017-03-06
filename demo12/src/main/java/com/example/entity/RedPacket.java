@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import com.example.entity.base.BaseEntity;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,33 +11,41 @@ import java.util.List;
  */
 @Table(name = "red_packet")
 @Entity
-public class RedPacket {
-
+public class RedPacket extends BaseEntity {
+    @Id
+    @GeneratedValue
     private long id;
 
     /**
      * 红包金额
      */
 
-    private double red_packet_amount;
+    private double redPacketAmount;
     /**
      * 红包类型
      */
 
-    private int red_packet_type;
+    private int redPacketType;
     /**
      * 红包份数
      */
-
-    private int red_packet_part_num;
+    private int redPacketPartNum;
     /**
-     *
+     * 发红包的人的id
      */
+    private long userId;
+
+    /**
+     * 红包的部分
+     */
+    @Transient
     private List<RedPacketPart> redPacketPartList;
+    /**
+     * 发红包的人
+     */
+    @Transient
     private User user;
 
-    @Id
-    @GeneratedValue
     public long getId() {
         return id;
     }
@@ -44,49 +54,51 @@ public class RedPacket {
         this.id = id;
     }
 
-    @Column(name = "RED_PACKET_AMOUNT")
-    public double getRed_packet_amount() {
-        return red_packet_amount;
+    public double getRedPacketAmount() {
+        return redPacketAmount;
     }
 
-    public void setRed_packet_amount(double red_packet_amount) {
-        this.red_packet_amount = red_packet_amount;
+    public void setRedPacketAmount(double redPacketAmount) {
+        this.redPacketAmount = redPacketAmount;
     }
 
-    @Column(name = "RED_PACKET_TYPE")
-    public int getRed_packet_type() {
-        return red_packet_type;
+    public int getRedPacketType() {
+        return redPacketType;
     }
 
-    public void setRed_packet_type(int red_packet_type) {
-        this.red_packet_type = red_packet_type;
+    public void setRedPacketType(int redPacketType) {
+        this.redPacketType = redPacketType;
     }
 
-    @Column(name = "RED_PACKET_PART_NUM")
-    public int getRed_packet_part_num() {
-        return red_packet_part_num;
+    public int getRedPacketPartNum() {
+        return redPacketPartNum;
     }
 
-    public void setRed_packet_part_num(int red_packet_part_num) {
-        this.red_packet_part_num = red_packet_part_num;
+    public void setRedPacketPartNum(int redPacketPartNum) {
+        this.redPacketPartNum = redPacketPartNum;
     }
 
-    @JoinColumn(name = "USER_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    @OneToMany(mappedBy = "redPacket")
     public List<RedPacketPart> getRedPacketPartList() {
         return redPacketPartList;
     }
 
     public void setRedPacketPartList(List<RedPacketPart> redPacketPartList) {
         this.redPacketPartList = redPacketPartList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

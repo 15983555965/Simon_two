@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import com.example.entity.base.BaseEntity;
+
 import javax.persistence.*;
 
 /**
@@ -8,24 +10,34 @@ import javax.persistence.*;
  */
 @Table(name = "red_packet_part")
 @Entity
-public class RedPacketPart {
-
+public class RedPacketPart extends BaseEntity {
+    @Id
+    @GeneratedValue
     private long id;
     /**
      * 红包一份的金额
      */
 
-    private double red_packet_part_amount;
+    private double redPacketPartAmount;
+    /**
+     * 用户id
+     */
+    private long userId;
+    /**
+     * 所属红包的id
+     */
+    private long redPacketId;
     /**
      * 所属用户的id
      */
-
+    @Transient
     private User user;
-
+    /**
+     * 所属红包
+     */
+    @Transient
     private RedPacket redPacket;
 
-    @Id
-    @GeneratedValue
     public long getId() {
         return id;
     }
@@ -34,27 +46,14 @@ public class RedPacketPart {
         this.id = id;
     }
 
-    @Column(name = "RED_PACKET_PART_AMOUNT")
-    public double getRed_packet_part_amount() {
-        return red_packet_part_amount;
+    public double getRedPacketPartAmount() {
+        return redPacketPartAmount;
     }
 
-    public void setRed_packet_part_amount(double red_packet_part_amount) {
-        this.red_packet_part_amount = red_packet_part_amount;
+    public void setRedPacketPartAmount(double redPacketPartAmount) {
+        this.redPacketPartAmount = redPacketPartAmount;
     }
 
-    @JoinColumn(name = "RED_PACKET_ID")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public RedPacket getRedPacket() {
-        return redPacket;
-    }
-
-    public void setRedPacket(RedPacket redPacket) {
-        this.redPacket = redPacket;
-    }
-
-    @JoinColumn(name = "USER_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
     public User getUser() {
         return user;
     }
@@ -63,4 +62,27 @@ public class RedPacketPart {
         this.user = user;
     }
 
+    public RedPacket getRedPacket() {
+        return redPacket;
+    }
+
+    public void setRedPacket(RedPacket redPacket) {
+        this.redPacket = redPacket;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getRedPacketId() {
+        return redPacketId;
+    }
+
+    public void setRedPacketId(long redPacketId) {
+        this.redPacketId = redPacketId;
+    }
 }

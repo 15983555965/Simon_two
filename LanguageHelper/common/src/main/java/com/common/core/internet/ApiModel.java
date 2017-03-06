@@ -54,32 +54,31 @@ public abstract class ApiModel implements Serializable, Cloneable {
      */
     public final void parseResult(String json) throws JSONException {
         if (!StringUtils.isEmpty(json)) {
-            parseJson(json);
-//            if (JsonUtils.isJsonObject(json)) {
-//                JsonObject obj = JsonUtils.getJsonObject(json);
-//                if (obj != null) {
-//                    for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-//                        JsonElement element = entry.getValue();
-//                        if (element.isJsonPrimitive()) {
-//                            extra.putString(entry.getKey(), entry.getValue().getAsString());
-//                        }
-//                    }
-//                    if (obj.has("status")) {
-//                        statusState = obj.get("status").getAsInt();
-//                    }
-//                    if (obj.has("info")) {
-//                        errorMsg = obj.get("info").getAsString();
-//                    }
-//                    if (obj.has("result")) {
-//                        Object object = obj.get("result");
-//                        parseJson(object.toString());
-//                    } else {
-//                        parseJson(json);
-//                    }
-//                } else {
-//                    parseJson(json);
-//                }
-//            }
+            if (JsonUtils.isJsonObject(json)) {
+                JsonObject obj = JsonUtils.getJsonObject(json);
+                if (obj != null) {
+                    for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                        JsonElement element = entry.getValue();
+                        if (element.isJsonPrimitive()) {
+                            extra.putString(entry.getKey(), entry.getValue().getAsString());
+                        }
+                    }
+                    if (obj.has("status")) {
+                        statusState = obj.get("status").getAsInt();
+                    }
+                    if (obj.has("info")) {
+                        errorMsg = obj.get("info").getAsString();
+                    }
+                    if (obj.has("result")) {
+                        Object object = obj.get("result");
+                        parseJson(object.toString());
+                    } else {
+                        parseJson(json);
+                    }
+                } else {
+                    parseJson(json);
+                }
+            }
         }
     }
 

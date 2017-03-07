@@ -26,7 +26,7 @@ public class UserController {
      * @param nickname
      * @return
      */
-    @RequestMapping(value = "register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public BaseEntity register(@RequestParam String account, @RequestParam String password, @RequestParam String nickname) {
         User user = new User();
         user.setAccount(account);
@@ -41,6 +41,7 @@ public class UserController {
      * @param account
      * @param password
      */
+    @RequestMapping(value = "/login")
     public BaseEntity login(@RequestParam String account, @RequestParam String password){
         User user = userRepository.findOneByAccountAndPassword(account, password);
         if (user==null){

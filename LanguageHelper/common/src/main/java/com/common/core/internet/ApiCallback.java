@@ -9,7 +9,6 @@ package com.common.core.internet;
 public abstract class ApiCallback<T extends ApiModel> {
 
     private int statusCode;
-    private int statusState;
     private String responseString;
     private Throwable throwable;
 
@@ -25,14 +24,6 @@ public abstract class ApiCallback<T extends ApiModel> {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
-    }
-
-    public int getStatusState() {
-        return statusState;
-    }
-
-    public void setStatusState(int statusState) {
-        this.statusState = statusState;
     }
 
     public String getResponseString() {
@@ -57,7 +48,6 @@ public abstract class ApiCallback<T extends ApiModel> {
      * @return
      */
     public boolean available() {
-        return statusState == ApiModel.STATE_OK &&
-                (statusCode >= 200 && statusCode <= 207);
+        return (statusCode >= 200 && statusCode <= 207);
     }
 }

@@ -14,6 +14,7 @@ import com.common.modules.location.LocationServer;
 import com.common.modules.network.NetworkState;
 import com.common.modules.property.PhoneProperties;
 import com.common.utils.FileUtils;
+import com.common.utils.LogUtils;
 import com.common.utils.SecurityUtils;
 import com.common.utils.StringUtils;
 import com.common.utils.UIUtils;
@@ -441,9 +442,7 @@ public abstract class Api extends BaseModule {
                     ApiModel model = apiResult.getApiModel();
                     if (model != null) {
                         if (error == null) {
-                            model.statusState = ApiModel.STATE_OK;
                         } else {
-                            model.statusState = ApiModel.STATE_FAIL;
                             model.errorMsg = error.toString();
                         }
                         if (networkResponse != null) {
@@ -502,12 +501,6 @@ public abstract class Api extends BaseModule {
             public void run() {
                 if (mApiCallback != null) {
 
-                    if (handler.error == null) {
-                        mApiCallback.setStatusState(ApiModel.STATE_OK);
-                    } else {
-                        mApiCallback.setStatusState(ApiModel.STATE_FAIL);
-                    }
-
                     if (handler.networkResponse != null) {
                         mApiCallback.setStatusCode(handler.networkResponse.statusCode);
                     }
@@ -532,7 +525,6 @@ public abstract class Api extends BaseModule {
                 if (mApiCallback != null) {
                     mApiCallback.setResponseString(handler.getResponseString());
                     mApiCallback.setStatusCode(handler.getStatusCode());
-                    mApiCallback.setStatusState(handler.getStatusState());
                     mApiCallback.setThrowable(handler.getThrowable());
                     mApiCallback.onResult(result.getApiModel());
                 }

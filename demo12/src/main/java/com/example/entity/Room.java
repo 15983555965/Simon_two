@@ -204,4 +204,8 @@ public class Room extends BaseEntity {
         }
         return true;
     }
+
+    public void addOneUser() {
+        currentUserCount++;
+    }
 }

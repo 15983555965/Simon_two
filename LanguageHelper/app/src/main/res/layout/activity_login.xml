@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="100dp"
+            style="@style/UIKit.Font.Huge.Orange"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:text="登录:" />
+
+        <EditText
+            android:id="@+id/et_login_account"
+            android:layout_marginLeft="10dp"
+            style="@style/UIKit.Font.Big"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="100dp"
+            style="@style/UIKit.Font.Huge.Orange"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:text="密码:" />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_marginLeft="10dp"
+            style="@style/UIKit.Font.Big"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_login_commit"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        style="@style/UIKit.Font.Huge.White"
+        android:text="登录"
+        android:background="@color/uikit_orange" />
+</LinearLayout>

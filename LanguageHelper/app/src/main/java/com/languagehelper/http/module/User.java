@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/2/28.
  */
 
-public class User extends ApiModel {
+public class User extends BaseModel {
     private String name;
     private int age;
 

@@ -25,18 +25,9 @@ import java.util.Map;
  * @version 1.0
  */
 public abstract class ApiModel implements Serializable, Cloneable {
-    /**
-     * 状态成功
-     */
-    public static final int STATE_OK = 1;
-    /**
-     * 状态失败
-     */
-    public static final int STATE_FAIL = 0;
 
     public int statusCode;
 
-    public int statusState;
 
     public String errorMsg;
 
@@ -64,7 +55,7 @@ public abstract class ApiModel implements Serializable, Cloneable {
                         }
                     }
                     if (obj.has("status")) {
-                        statusState = obj.get("status").getAsInt();
+                        statusCode = obj.get("status").getAsInt();
                     }
                     if (obj.has("info")) {
                         errorMsg = obj.get("info").getAsString();
@@ -115,12 +106,10 @@ public abstract class ApiModel implements Serializable, Cloneable {
      * @return
      */
     public boolean available() {
-        return statusState == ApiModel.STATE_OK &&
-                (statusCode >= 200 && statusCode <= 207);
+        return (statusCode >= 200 && statusCode <= 207);
     }
 
     public void setAvailable() {
-        statusState = ApiModel.STATE_OK;
         statusCode = 200;
     }
 
@@ -128,9 +117,6 @@ public abstract class ApiModel implements Serializable, Cloneable {
         return statusCode;
     }
 
-    public int getStatusState() {
-        return statusState;
-    }
 
     public String getErrorMsg() {
         return errorMsg;

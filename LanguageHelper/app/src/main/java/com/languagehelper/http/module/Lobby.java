@@ -8,7 +8,7 @@ import org.json.JSONException;
  * Created by Administrator on 2017/3/1.
  */
 
-public class Lobby extends ApiModel{
+public class Lobby extends BaseModel {
     private String title;
     @Override
     public void parseJson(String json) throws JSONException {

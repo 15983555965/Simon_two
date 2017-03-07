@@ -8,7 +8,7 @@ import org.json.JSONException;
  * Created by Administrator on 2017/3/4.
  */
 
-public class RedPacketDetailItem extends ApiModel {
+public class RedPacketDetailItem extends BaseModel {
     private String headimgPath;
     private String userName;
     private String time;

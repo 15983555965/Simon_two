@@ -1,12 +1,14 @@
 package com.common.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.common.base.BaseApplication;
 
@@ -108,41 +110,34 @@ public class UIUtils {
 		}
 	}
 
-//	public static void startActivity(Intent intent){
-//		BaseActivity activity = BaseActivity.getForegroundActivity();
-//		if(activity != null){
-//			activity.startActivity(intent);
-//		}else{
-//			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			getContext().startActivity(intent);
-//		}
-//	}
-//
-//	/** 对toast的简易封装。线程安全，可以在非UI线程调用。 */
-//	public static void showToastSafe(final int resId) {
-//		showToastSafe(getString(resId));
-//	}
-//
-//	/** 对toast的简易封装。线程安全，可以在非UI线程调用。 */
-//	public static void showToastSafe(final String str) {
-//		if (isRunInMainThread()) {
-//			showToast(str);
-//		} else {
-//			post(new Runnable() {
-//				@Override
-//				public void run() {
-//					showToast(str);
-//				}
-//			});
-//		}
-//	}
-//
-//	private static void showToast(String str) {
-//		BaseActivity frontActivity = BaseActivity.getForegroundActivity();
-//		if (frontActivity != null) {
-//			Toast.makeText(frontActivity, str, Toast.LENGTH_LONG).show();
-//		}
-//	}
+	/**
+	 * 对toast的简易封装。线程安全，可以在非UI线程调用。
+	 */
+	public static void showToastSafe(Context context, final int resId) {
+		showToastSafe(context, getString(resId));
+	}
+
+	/**
+	 * 对toast的简易封装。线程安全，可以在非UI线程调用。
+	 */
+	public static void showToastSafe(final Context context, final String str) {
+		if (isRunInMainThread()) {
+			showToast(context, str);
+		} else {
+			post(new Runnable() {
+				@Override
+				public void run() {
+					showToast(context, str);
+				}
+			});
+		}
+	}
+
+	private static void showToast(Context context, String str) {
+		if (context != null) {
+			Toast.makeText(context, str, Toast.LENGTH_LONG).show();
+		}
+	}
 }
 
 

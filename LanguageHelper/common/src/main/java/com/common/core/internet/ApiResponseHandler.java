@@ -14,7 +14,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     private Api mApi;
     private ApiResult apiResult;
     private int statusCode;
-    private int statusState;
     private String responseString;
     private Throwable throwable;
 
@@ -27,7 +26,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_OK;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(responseString);
@@ -36,7 +34,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_OK;
         this.responseString = responseString;
         mApi.dispatchApiCallback(this, apiResult);
     }
@@ -45,7 +42,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
         ApiResult apiResult = new ApiResult(mApi);
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_FAIL;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(responseString);
@@ -54,7 +50,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_FAIL;
         this.responseString = responseString;
         this.throwable = throwable;
         mApi.dispatchApiCallback(this, apiResult);
@@ -64,7 +59,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
         ApiResult apiResult = new ApiResult(mApi);
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_FAIL;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(errorResponse);
@@ -73,7 +67,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_FAIL;
         if (errorResponse != null) {
             this.responseString = errorResponse.toString();
         }
@@ -85,7 +78,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
         ApiResult apiResult = new ApiResult(mApi);
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_FAIL;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(errorResponse);
@@ -94,7 +86,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_FAIL;
         if (errorResponse != null) {
             this.responseString = errorResponse.toString();
         }
@@ -106,7 +97,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
         ApiResult apiResult = new ApiResult(mApi);
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_OK;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(response);
@@ -115,7 +105,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_OK;
         this.responseString = response.toString();
         mApi.dispatchApiCallback(this, apiResult);
     }
@@ -124,7 +113,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         ApiResult apiResult = new ApiResult(mApi);
         if (apiResult.getApiModel() != null) {
-            apiResult.getApiModel().statusState = ApiModel.STATE_OK;
             apiResult.getApiModel().statusCode = statusCode;
             try {
                 apiResult.parseModel(response);
@@ -133,7 +121,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
             }
         }
         this.statusCode = statusCode;
-        statusState = ApiModel.STATE_OK;
         this.responseString = response.toString();
         mApi.dispatchApiCallback(this, apiResult);
     }
@@ -142,9 +129,6 @@ public class ApiResponseHandler extends JsonHttpResponseHandler {
         return statusCode;
     }
 
-    public int getStatusState() {
-        return statusState;
-    }
 
     public String getResponseString() {
         return responseString;

@@ -8,6 +8,8 @@ import com.example.repository.UserRepository;
 import com.example.utils.HttpResultUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/7.
  */
@@ -70,13 +72,27 @@ public class RoomController {
         if (room!=null&&room.isCanJoinRoom(password)){
             User user = userRepository.findOne(userId);
             user.setRoomId(roomId);
+            room.addOneUser();
+            roomRepository.save(room);
             return HttpResultUtils.createResult();
         }
-        return HttpResultUtils.createResult(BaseEntity.CODE_201,"进入房间失败");
+        return HttpResultUtils.createResult(BaseEntity.CODE_3022,"进入房间失败");
     }
 
-    public void getRoomInfo(@RequestParam long roomId){
-
+    /**
+     * 获取房间信息
+     * @param roomId
+     * @return
+     */
+    @RequestMapping(value = "/roomInfo",method = RequestMethod.GET)
+    public BaseEntity getRoomInfo(@RequestParam long roomId){
+        Room room = roomRepository.findOne(roomId);
+        if (room==null){
+            return HttpResultUtils.createResult(BaseEntity.CODE_3021,"获取房间信息失败");
+        }
+        List<User> users = userRepository.findAllByRoomId(room.getId());
+        room.setUsers(users);
+        return room;
     }
 
 }

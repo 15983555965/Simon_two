@@ -1,5 +1,7 @@
 package com.languagehelper.ui.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -61,5 +63,10 @@ public class MainActivity extends MActivity {
 
             }
         });
+    }
+
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
     }
 }

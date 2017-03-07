@@ -7,45 +7,7 @@ import javax.persistence.Transient;
  */
 public class BaseEntity {
     public static final int CODE_200=200;
-    public static final int CODE_201=301;//进入房间失败
-    /**
-     * 状态code
-     */
-    @Transient
-    private int status;
-    /**
-     * 结果信息
-     */
-    @Transient
-    private Object result;
-    /**
-     * 信息
-     */
-    @Transient
-    private String info;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Object getResult() {
-        return result;
-    }
-
-    public void setResult(Object result) {
-        this.result = result;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
+    public static final int CODE_3022 =3022;//进入房间失败
+    public static final int CODE_3021 = 3021;//获取房间信息失败
 
 }

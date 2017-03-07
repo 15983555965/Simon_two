@@ -6,6 +6,8 @@ import javax.persistence.Transient;
  * Created by Administrator on 2017/3/6.
  */
 public class BaseEntity {
+    public static final int CODE_200=200;
+    public static final int CODE_201=301;//进入房间失败
     /**
      * 状态code
      */

@@ -52,6 +52,18 @@ public class User extends BaseEntity {
      */
 
     private int user_type;
+    /**
+     * 用户手机号码
+     */
+    private String phone;
+    /**
+     * 令牌Token
+     */
+    private String token;
+    /**
+     * 房间Id
+     */
+    private long roomId;
 
     /**
      * 进入得房间
@@ -138,5 +150,29 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
     }
 }

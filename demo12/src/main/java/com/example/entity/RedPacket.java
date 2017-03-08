@@ -34,6 +34,18 @@ public class RedPacket extends BaseEntity {
      * 发红包的人的id
      */
     private long userId;
+    /**
+     * 房间id
+     */
+    private long roomId;
+    /**
+     * 红包创建时间
+     */
+    private long createTime;
+    /**
+     * 红包抢完时间
+     */
+    private long finishTime;
 
     /**
      * 红包的部分
@@ -45,6 +57,11 @@ public class RedPacket extends BaseEntity {
      */
     @Transient
     private User user;
+    /**
+     * 当前查看人的红包部分
+     */
+    @Transient
+    private RedPacketPart currentUserRedPacketPart;
 
     public long getId() {
         return id;
@@ -100,5 +117,37 @@ public class RedPacket extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public long getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(long finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
+    }
+
+    public RedPacketPart getCurrentUserRedPacketPart() {
+        return currentUserRedPacketPart;
+    }
+
+    public void setCurrentUserRedPacketPart(RedPacketPart currentUserRedPacketPart) {
+        this.currentUserRedPacketPart = currentUserRedPacketPart;
     }
 }

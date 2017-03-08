@@ -1,8 +1,4 @@
-package com.languagehelper.web_code;
-
-
-
-import com.common.utils.StringUtils;
+package com.example.utils;
 
 import java.text.NumberFormat;
 import java.util.Random;

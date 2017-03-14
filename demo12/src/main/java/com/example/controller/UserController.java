@@ -1,10 +1,14 @@
 package com.example.controller;
 
 import com.example.entity.Room;
+import com.example.config.RongYunConfig;
 import com.example.entity.User;
 import com.example.entity.base.BaseEntity;
 import com.example.repository.RoomRepository;
 import com.example.repository.UserRepository;
+import com.example.three_sdk.rong.RongCloud;
+import com.example.three_sdk.rong.models.CodeSuccessReslut;
+import com.example.three_sdk.rong.models.TokenReslut;
 import com.example.utils.HttpResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -17,12 +21,20 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    private RongCloud rongCloud;
     private RoomRepository roomRepository;
+
 
 
     public UserController(RoomRepository roomRepository,UserRepository userRepository) {
         this.roomRepository = roomRepository;
         this.userRepository=userRepository;
+            initData();
+    }
+
+
+    private void initData() {
+        rongCloud = RongCloud.getInstance(RongYunConfig.appKey, RongYunConfig.appSecret);
     }
 
     /**
@@ -32,12 +44,15 @@ public class UserController {
      * @param nickname
      * @return
      */
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public BaseEntity register(@RequestParam String account, @RequestParam String password, @RequestParam String nickname) {
+    public BaseEntity register(@RequestParam String account, @RequestParam String password, @RequestParam String nickname) throws Exception {
         User user = new User();
         user.setAccount(account);
         user.setNickname(nickname);
         user.setPassword(password);
+        TokenReslut token = rongCloud.user.getToken(user.getId() + "", user.getNickname(), "http://www.rongcloud.cn/images/logo.png");
+        user.setToken(token.getToken());
         userRepository.save(user);
         return HttpResultUtils.createResult();
     }
@@ -48,12 +63,17 @@ public class UserController {
      * @param password
      */
     @RequestMapping(value = "/login")
-    public BaseEntity login(@RequestParam String account, @RequestParam String password){
-        User user = userRepository.findOneByAccountAndPassword(account, password);
-        if (user==null){
-           return HttpResultUtils.createResult(201,"没有此用户");
+    public BaseEntity login(@RequestParam String account, @RequestParam String password,@RequestParam String token){
+        User user = null;
+        if (StringUtils.isEmpty(token)) {
+            user = userRepository.findOneByAccountAndPassword(account, password);
+        }else{
+            user = userRepository.findAllByToken(token);
         }
-        //TODO 生成Token
+
+        if (user == null) {
+            return HttpResultUtils.createResultByCode(BaseEntity.CODE_3101);
+        }
         return HttpResultUtils.createResult(user);
     }
 
@@ -82,7 +102,18 @@ public class UserController {
         }
         return HttpResultUtils.createResultByCode(BaseEntity.CODE_200);
     }
-
+    @RequestMapping("/updateProtrait")
+    public BaseEntity updatePortrait(@RequestParam long user_id, @RequestParam String nick_name, @RequestParam String portrait) throws Exception {
+        User user = userRepository.findOne(user_id);
+        user.setNickname(nick_name);
+        user.setPortrait(portrait);
+        CodeSuccessReslut userRefreshResult = rongCloud.user.refresh(user.getId()+"", user.getNickname(), user.getPortrait());
+        if (userRefreshResult.getCode()!=BaseEntity.CODE_200){
+            return HttpResultUtils.createResultByCode(BaseEntity.CODE_3102);
+        }
+        userRepository.save(user);
+        return HttpResultUtils.createResultByCode(BaseEntity.CODE_200);
+    }
 
 
 }
